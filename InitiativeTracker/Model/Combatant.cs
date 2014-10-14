@@ -53,12 +53,11 @@
         }
 
         //Clone combatant
-        public Combatant Clone (Combatant original)
+        public Combatant Clone ()
         {
-            var dupe = new Combatant("Dupe");
-            dupe = original;
-            //increment int
-            dupe.Counter = original.Counter + 1;
+            var dupe = new Combatant(Name);
+            //increment counter
+            dupe.Counter = Counter + 1;
             //Return Clone
             return dupe;
         }
