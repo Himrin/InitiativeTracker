@@ -41,21 +41,6 @@
         
         #endregion
 
-        #region Initative Functions
-		 
-	    public void SetInit (int val)
-        {
-            this.Initiative = val;
-        }
-        
-        public void SetDexMod (int mod)
-        {
-            this.DexModifier = mod;
-        }
-
-        #endregion
-
-
         //Display Name
         public string DisplayName()
         {
