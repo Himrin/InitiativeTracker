@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace InitiativeTracker.Combatant
+﻿namespace InitiativeTracker.Model
 {
     class Combatant
     {
         //Combatant attributes
         public int Initiative {get;  set;}
         public int DexModifier {get;  set;}
-        public string Name { get; private set; }
+        public string Name { get; set; }
         public char Type { get;  set; }
-        public int Counter { get; private set; }
+        public int Counter { get; set; }
 
         //Constructors
         public Combatant(string name)
@@ -49,37 +43,22 @@ namespace InitiativeTracker.Combatant
 
         #endregion
 
-        //Set Name
-        public void SetName (string name)
-        {
-            Name = name;
-        }
 
-
-        //Set Type
-        public void SetType (char identifier)
+        //Display Name
+        public string DisplayName()
         {
-            Type = identifier;
-        }
-
-        //Set Counter
-        public void SetCounter(int counter)
-        {
-            Counter = counter;
+            return Name + (Counter > 0
+                            ? " " + Counter
+                            : "");
         }
 
         //Clone combatant
         public Combatant Clone (Combatant original)
         {
-            Combatant dupe = new Combatant("dupe");
-            int newCount;
+            var dupe = new Combatant("Dupe");
             dupe = original;
             //increment int
-            newCount = original.Counter + 1;
-            //set new append
-            dupe.SetName(original.Name + " " + newCount.ToString());
-            //Set new counter
-            dupe.SetCounter(newCount);
+            dupe.Counter = original.Counter + 1;
             //Return Clone
             return dupe;
         }
