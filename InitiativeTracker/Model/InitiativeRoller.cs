@@ -4,9 +4,9 @@ namespace InitiativeTracker.Model
 {
     static class InitiativeRoller
     {
-        Random icosahedron = new Random();
+        static Random icosahedron = new Random();
 
-        public int RollInitiativeFor(Combatant combatant)
+        public static int RollInitiativeFor(Combatant combatant)
         {
             return icosahedron.Next(1, 21) + combatant.DexModifier;
         }
