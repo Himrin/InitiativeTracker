@@ -3,13 +3,14 @@
     class Combatant
     {
         //Combatant attributes
-        public int Initiative {get;  set;}
-        public int DexModifier {get;  set;}
+        public int Initiative { get; set; }
+        public int DexModifier { get; set; }
         public string Name { get; set; }
-        public char Type { get;  set; }
+        public char Type { get; set; }
         public int Counter { get; set; }
 
         #region Constructors
+
         public Combatant(string name)
         {
             Name = name;
@@ -38,23 +39,21 @@
             Initiative = combatant.Initiative;
             Type = combatant.Type;
         }
-        
+
         #endregion
 
         //Display Name
         public string DisplayName()
         {
             return Name + (Counter > 0
-                            ? " " + Counter
-                            : "");
+                ? " " + Counter
+                : "");
         }
 
         //Clone combatant
-        public Combatant Clone ()
+        public Combatant Clone()
         {
-            var dupe = new Combatant(this);
-            //increment counter
-            dupe.Counter = Counter + 1;
+            var dupe = new Combatant(this) {Counter = Counter + 1};
             //Return Clone
             return dupe;
         }
