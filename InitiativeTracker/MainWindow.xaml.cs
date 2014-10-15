@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using InitiativeTracker.Model;
 
 namespace InitiativeTracker
 {
@@ -20,9 +10,13 @@ namespace InitiativeTracker
     /// </summary>
     public partial class MainWindow : Window
     {
+        ObservableCollection<Combatant> _combatants = new ObservableCollection<Combatant>();
+
         public MainWindow()
         {
             InitializeComponent();
+            _combatants.Add(new Combatant("Test Combatant", 'P', 3));
+            CombatantDisplayList.ItemsSource = _combatants;
         }
     }
 }
