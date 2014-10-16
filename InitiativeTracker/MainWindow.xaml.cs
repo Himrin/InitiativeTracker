@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using InitiativeTracker.Model;
 
@@ -32,19 +32,25 @@ namespace InitiativeTracker
 
         private void AddCopy_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Combatant selectedItem in CombatantDisplayList.SelectedItems)
+            foreach (var selectedItem in CombatantDisplayList.SelectedItems.OfType<Combatant>())
             {
-                var copy = selectedItem.Clone();
-                foreach (var combatant in _combatants)
-                {
-                    if (copy.Name == combatant.Name && copy.Counter < combatant.Counter)
-                    {
-                        copy.Counter = combatant.Counter;
-                    }
-                }
-                copy.Counter++;
-                _combatants.Add(copy);
+                AddCombatantCopy(selectedItem);
             }
+        }
+
+        private void AddCombatantCopy(Combatant original)
+        {
+            var copy = original.Clone();
+
+            //Find highest combatant counter in list with same name
+            var highestCombatant = _combatants.Where(combatant => combatant.Name == copy.Name).OrderByDescending(combatant => combatant.Counter).First();
+
+            //if highest combatant is a counter of 0, make it one
+            if (highestCombatant.Counter == 0)
+                highestCombatant.Counter = 1;
+
+            copy.Counter = highestCombatant.Counter + 1;
+            _combatants.Add(copy);
         }
     }
 }
