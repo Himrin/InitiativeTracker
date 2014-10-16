@@ -55,7 +55,11 @@ namespace InitiativeTracker
 
         private void RemoveCombatant_Click(object sender, RoutedEventArgs e)
         {
-            _combatants.Remove((Combatant) CombatantDisplayList.SelectedItem);
+            var toRemove = CombatantDisplayList.SelectedItems.OfType<Combatant>().ToList();
+            foreach (var item in toRemove)
+            {
+                _combatants.Remove(item);
+            }
         }
     }
 }
