@@ -4,7 +4,7 @@ using InitiativeTracker.Annotations;
 
 namespace InitiativeTracker.Model
 {
-    class Combatant: INotifyPropertyChanged
+    public class Combatant: INotifyPropertyChanged
     {
         //Combatant attributes
         private int _initiative;
@@ -70,7 +70,7 @@ namespace InitiativeTracker.Model
         //Clone combatant
         public Combatant Clone()
         {
-            var dupe = new Combatant(this) {Counter = Counter + 1};
+            var dupe = new Combatant(this);
             //Return Clone
             return dupe;
         }

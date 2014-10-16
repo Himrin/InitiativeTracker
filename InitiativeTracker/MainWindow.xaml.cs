@@ -22,15 +22,29 @@ namespace InitiativeTracker
         private void AddCombatant_Click(object sender, RoutedEventArgs e)
         {
             var addCombatantDialog = new AddCombatantDialog {Owner = this};
+            
             if (addCombatantDialog.ShowDialog() == true)
             {
-                var cName = addCombatantDialog.CombatantName.Text;
-                var cType = addCombatantDialog.PlayerRadio.IsChecked == true ? 'P' : 'M';
-                var cDexMod = (int) addCombatantDialog.DexModSlider.Value;
-
-                _combatants.Add(new Combatant(cName,cType,cDexMod));
+                _combatants.Add(addCombatantDialog.Combatant);
             };
 
+        }
+
+        private void AddCopy_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Combatant selectedItem in CombatantDisplayList.SelectedItems)
+            {
+                var copy = selectedItem.Clone();
+                foreach (var combatant in _combatants)
+                {
+                    if (copy.Name == combatant.Name && copy.Counter < combatant.Counter)
+                    {
+                        copy.Counter = combatant.Counter;
+                    }
+                }
+                copy.Counter++;
+                _combatants.Add(copy);
+            }
         }
     }
 }
