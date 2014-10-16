@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using InitiativeTracker.Model;
 
@@ -20,8 +21,16 @@ namespace InitiativeTracker
 
         private void AddCombatant_Click(object sender, RoutedEventArgs e)
         {
-            var addCombatantDialog = new AddCombatantDialog();
-            addCombatantDialog.Show();
+            var addCombatantDialog = new AddCombatantDialog {Owner = this};
+            if (addCombatantDialog.ShowDialog() == true)
+            {
+                var cName = addCombatantDialog.CombatantName.Text;
+                var cType = addCombatantDialog.PlayerRadio.IsChecked == true ? 'P' : 'M';
+                var cDexMod = (int) addCombatantDialog.DexModSlider.Value;
+
+                _combatants.Add(new Combatant(cName,cType,cDexMod));
+            };
+
         }
     }
 }
