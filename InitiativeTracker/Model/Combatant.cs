@@ -1,9 +1,26 @@
-﻿namespace InitiativeTracker.Model
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using InitiativeTracker.Annotations;
+
+namespace InitiativeTracker.Model
 {
-    class Combatant
+    class Combatant: INotifyPropertyChanged
     {
         //Combatant attributes
-        public int Initiative { get; set; }
+        private int _initiative;
+
+        public int Initiative
+        {
+            get { return _initiative; }
+            set
+            {
+                if (_initiative != value)
+                {
+                    _initiative = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public int DexModifier { get; set; }
         public string Name { get; set; }
         public char Type { get; set; }
@@ -56,6 +73,15 @@
             var dupe = new Combatant(this) {Counter = Counter + 1};
             //Return Clone
             return dupe;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

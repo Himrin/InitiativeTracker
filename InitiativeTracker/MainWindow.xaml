@@ -7,9 +7,9 @@
         <DataTemplate x:Key="CombatantItemDisplay">
 			<Grid>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition></ColumnDefinition>
-					<ColumnDefinition></ColumnDefinition>
-					<ColumnDefinition></ColumnDefinition>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
 				<TextBlock Grid.Column="0" Text="{Binding Name}" Margin="10"/>
 				<TextBlock Grid.Column="1" Text="{Binding Initiative}" Margin="10" />
