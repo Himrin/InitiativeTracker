@@ -52,5 +52,10 @@ namespace InitiativeTracker
             copy.Counter = highestCombatant.Counter + 1;
             _combatants.Add(copy);
         }
+
+        private void RemoveCombatant_Click(object sender, RoutedEventArgs e)
+        {
+            _combatants.Remove((Combatant) CombatantDisplayList.SelectedItem);
+        }
     }
 }
