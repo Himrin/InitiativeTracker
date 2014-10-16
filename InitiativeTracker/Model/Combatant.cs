@@ -8,6 +8,9 @@ namespace InitiativeTracker.Model
     {
         //Combatant attributes
         private int _initiative;
+        private string _name;
+        private int _counter;
+        private string _displayName;
 
         public int Initiative
         {
@@ -22,9 +25,41 @@ namespace InitiativeTracker.Model
             }
         }
         public int DexModifier { get; set; }
-        public string Name { get; set; }
+
+        public string DisplayName
+        {
+            get { return _displayName; }
+            set
+            {
+                if (_displayName != value)
+                {
+                    _displayName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                UpdateDisplayName();
+            }
+        }
+
         public char Type { get; set; }
-        public int Counter { get; set; }
+
+        public int Counter
+        {
+            get { return _counter; }
+            set
+            {
+                _counter = value;
+                UpdateDisplayName();
+            }
+        }
 
         #region Constructors
 
@@ -60,9 +95,9 @@ namespace InitiativeTracker.Model
         #endregion
 
         //Display Name
-        public string DisplayName()
+        public void UpdateDisplayName()
         {
-            return Name + (Counter > 0
+            DisplayName = Name + (Counter > 0
                 ? " " + Counter
                 : "");
         }

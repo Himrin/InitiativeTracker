@@ -11,7 +11,7 @@
 					<ColumnDefinition/>
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
-				<TextBlock Grid.Column="0" Text="{Binding Name}" Margin="10"/>
+				<TextBlock Grid.Column="0" Text="{Binding DisplayName}" Margin="10"/>
 				<TextBlock Grid.Column="1" Text="{Binding Initiative}" Margin="10" />
 				<TextBlock Grid.Column="2" Text="{Binding DexModifier}" Margin="10" />
 			</Grid>
