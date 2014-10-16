@@ -13,14 +13,16 @@
     		<RowDefinition Height="67*"/>
     		<RowDefinition Height="55*"/>
     	</Grid.RowDefinitions>
-    	<Button x:Name="AddButton" Content="Add Combatant" Grid.Row="3" Margin="10,5,5,10"/>
-    	<Button x:Name="CancelButton" Content="Cancel" Grid.Column="1" Grid.Row="3" Margin="5,5,10,10"/>
+    	<Button x:Name="AddButton" Content="Add Combatant" Grid.Row="3" IsDefault="True" Margin="10,5,5,10" Click="AddButton_Click"/>
+    	<Button x:Name="CancelButton" Content="Cancel" Grid.Column="1" Grid.Row="3" IsCancel="True" Margin="5,5,10,10"/>
     	<TextBlock TextWrapping="Wrap" Text="Combatant Name" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,22.395,5,22.395" Height="15.96" Width="93.97"/>
     	<TextBlock TextWrapping="Wrap" Text="Combatant Type" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,22.395,5,22.395" Height="15.96" Width="87.697"/>
     	<TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Dexterity Modifier" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25.383,5,25.382" Height="15.96" Width="95.674"/>
-    	<TextBox x:Name="CombatantName" Grid.Column="1" TextWrapping="Wrap" Text="Combatant Name" VerticalAlignment="Center" Margin="5,19.395,10,19.395" MaxLines="1" Height="21.96"/>
-    	<Slider x:Name="DexModSlider" Grid.Column="1" Grid.Row="2" TickPlacement="BottomRight" Maximum="5" Minimum="-5" SmallChange="1" VerticalAlignment="Bottom" Margin="5,0,10,34.725" IsSnapToTickEnabled="True" Height="22" />
-    	<TextBox Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Text="{Binding ElementName=DexModSlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:+#;-#;0}}" RenderTransformOrigin="0.088,2.364" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="63.266,0,68.267,7.765" Height="21.96" Width="16.47"/>
+    	<TextBox x:Name="CombatantName" Grid.Column="1" TextWrapping="Wrap" Text="Combatant Name" VerticalAlignment="Center" Margin="5,19.395,10,19.395" MaxLines="1" Height="21.96" HorizontalContentAlignment="Center"/>
+    	<Slider x:Name="DexModSlider" Grid.Column="1" Grid.Row="2" TickPlacement="BottomRight" Minimum="-5" SmallChange="1" VerticalAlignment="Bottom" Margin="5,0,10,34.725" IsSnapToTickEnabled="True" Height="22" />
+    	<TextBox Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Text="{Binding ElementName=DexModSlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:+#;-#;0}}" RenderTransformOrigin="0.088,2.364" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="47.932,0,58.267,7.765" Height="21.96" Width="41.804" HorizontalContentAlignment="Center"/>
+    	<RadioButton x:Name="PlayerRadio" Content="Player" Grid.Column="1" HorizontalAlignment="Left" Margin="9.999,10,56.093,0" Grid.Row="1" VerticalAlignment="Top" GroupName="CombatantType" IsChecked="True" HorizontalContentAlignment="Center"/>
+    	<RadioButton x:Name="MonsterRadio" Content="Monster" Grid.Column="1" HorizontalAlignment="Left" Margin="9.999,30.96,56.093,0" Grid.Row="1" VerticalAlignment="Top" GroupName="CombatantType" HorizontalContentAlignment="Center"/>
         
     </Grid>
 </Window>

@@ -17,5 +17,11 @@ namespace InitiativeTracker
             _combatants.Add(new Combatant("Test Combatant", 'P', 3));
             CombatantDisplayList.ItemsSource = _combatants;
         }
+
+        private void AddCombatant_Click(object sender, RoutedEventArgs e)
+        {
+            var addCombatantDialog = new AddCombatantDialog();
+            addCombatantDialog.Show();
+        }
     }
 }
