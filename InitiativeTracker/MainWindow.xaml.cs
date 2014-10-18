@@ -75,31 +75,25 @@ namespace InitiativeTracker
                 EndCombat.Visibility = Visibility.Hidden;
                 StartCombat.Visibility = Visibility.Visible;
             }
+            else if (RollerDialog.Monsters && RollerDialog.Players)
+            {
+                foreach (var combatant in _combatants)
+                {
+                    combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
+                }
+            }
+            else if (RollerDialog.Monsters)
+            {
+                foreach (var combatant in _combatants.Where(combatant => combatant.Type == 'M'))
+                {
+                    combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
+                }
+            }
             else
             {
-                if (RollerDialog.Monsters)
+                foreach (var combatant in _combatants.Where(combatant => combatant.Type == 'P'))
                 {
-                    foreach (var combatant in _combatants.Where(combatant => combatant.Type == 'M'))
-                    {
-                        combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
-                    }
-                }
-                else
-                {
-                    if (RollerDialog.Monsters && RollerDialog.Players)
-                    {
-                        foreach (var combatant in _combatants)
-                        {
-                            combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
-                        }
-                    }
-                    else
-                    {
-                        foreach (var combatant in _combatants.Where(combatant => combatant.Type == 'P'))
-                        {
-                            combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
-                        }
-                    }
+                    combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
                 }
             }
             #endregion
@@ -109,6 +103,8 @@ namespace InitiativeTracker
             {
                 _combatants[i] = sorted[i];
             }
+
+            CombatantDisplayList.SelectedItem = _combatants[_turnIndicator];
         }
     }
 }
