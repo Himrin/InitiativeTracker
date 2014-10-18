@@ -11,6 +11,7 @@ namespace InitiativeTracker
     public partial class MainWindow : Window
     {
         ObservableCollection<Combatant> _combatants = new ObservableCollection<Combatant>();
+        private int _turnIndicator = 0;
 
         public MainWindow()
         {
@@ -59,6 +60,18 @@ namespace InitiativeTracker
             foreach (var item in toRemove)
             {
                 _combatants.Remove(item);
+            }
+        }
+
+        private void StartCombat_Click(object sender, RoutedEventArgs e)
+        {
+            StartCombat.Visibility = Visibility.Hidden;
+            EndCombat.Visibility = Visibility.Visible;
+
+            var sorted = _combatants.OrderByDescending(combatant => combatant.Initiative).ToList();
+            for (var i = 0; i < sorted.Count; i++)
+            {
+                _combatants[i] = sorted[i];
             }
         }
     }
