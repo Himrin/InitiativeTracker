@@ -64,6 +64,9 @@
     <Compile Include="RollInitiativeDialog.xaml.cs">
       <DependentUpon>RollInitiativeDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SetInitiativeDialog.xaml.cs">
+      <DependentUpon>SetInitiativeDialog.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddCombatantDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +90,10 @@
     <Page Include="RollInitiativeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetInitiativeDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
