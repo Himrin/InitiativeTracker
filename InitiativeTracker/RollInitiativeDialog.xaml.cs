@@ -7,8 +7,8 @@ namespace InitiativeTracker
     /// </summary>
     public partial class RollInitiativeDialog : Window
     {
-        public bool monsters = true;
-        public bool players = false;
+        public bool Monsters { get; set; }
+        public bool Players { get; set; }
         public RollInitiativeDialog()
         {
             InitializeComponent();
@@ -16,19 +16,22 @@ namespace InitiativeTracker
 
         private void MonsterRoll_Click(object sender, RoutedEventArgs e)
         {
+            Monsters = true;
+            Players = false;
             DialogResult = true;
         }
 
         private void BothRoll_Click(object sender, RoutedEventArgs e)
         {
-            players = true;
+            Players = true;
+            Monsters = true;
             DialogResult = true;
         }
 
         private void PlayerRoll_Click(object sender, RoutedEventArgs e)
         {
-            monsters = false;
-            players = true;
+            Monsters = false;
+            Players = true;
             DialogResult = true;
         }
     }

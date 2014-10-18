@@ -68,6 +68,42 @@ namespace InitiativeTracker
             StartCombat.Visibility = Visibility.Hidden;
             EndCombat.Visibility = Visibility.Visible;
 
+            var RollerDialog = new RollInitiativeDialog();
+            #region Initiative Roller logic
+            if (RollerDialog.ShowDialog() == false)
+            {
+                EndCombat.Visibility = Visibility.Hidden;
+                StartCombat.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                if (RollerDialog.Monsters)
+                {
+                    foreach (var combatant in _combatants.Where(combatant => combatant.Type == 'M'))
+                    {
+                        combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
+                    }
+                }
+                else
+                {
+                    if (RollerDialog.Monsters && RollerDialog.Players)
+                    {
+                        foreach (var combatant in _combatants)
+                        {
+                            combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
+                        }
+                    }
+                    else
+                    {
+                        foreach (var combatant in _combatants.Where(combatant => combatant.Type == 'P'))
+                        {
+                            combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
+                        }
+                    }
+                }
+            }
+            #endregion
+
             var sorted = _combatants.OrderByDescending(combatant => combatant.Initiative).ToList();
             for (var i = 0; i < sorted.Count; i++)
             {
