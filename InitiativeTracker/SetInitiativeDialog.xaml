@@ -6,7 +6,7 @@
 	Title="SetInitiativeDialog"
 	Width="280.843" Height="295.949">
 	    <Window.Resources>
-        <DataTemplate x:Key="CombatantItemDisplay">
+        <DataTemplate x:Key="InitiativeItemDisplay">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition/>
@@ -26,8 +26,8 @@
 			<RowDefinition Height="140*"/>
 			<RowDefinition Height="23*"/>
 		</Grid.RowDefinitions>
-		<ListBox x:Name="InitiativeDisplayListBox" Grid.ColumnSpan="2" ItemTemplate="{DynamicResource CombatantItemDisplay}" Margin="10,10,10,5"/>
-		<Button x:Name="Accept" Content="Accept Initiatives" Grid.Row="1" Margin="10,5,5,10"/>
-		<Button x:Name="Reset" Content="Reset Initiatives to 0" Grid.Column="1" Grid.Row="1" Margin="5,5,10,10"/>
+		<ListBox x:Name="InitiativeDisplayListBox" Grid.ColumnSpan="2" ItemTemplate="{DynamicResource InitiativeItemDisplay}" Margin="10,10,10,5"/>
+        <Button x:Name="Accept" IsDefault="True" Content="Accept Initiatives" Grid.Row="1" Margin="10,5,5,10" Click="Accept_Click"/>
+        <Button x:Name="Reset" IsCancel="True" Content="Reset Initiatives to 0" Grid.Column="1" Grid.Row="1" Margin="5,5,10,10" Click="Reset_Click"/>
 	</Grid>
 </Window>

@@ -68,7 +68,7 @@ namespace InitiativeTracker
             StartCombat.Visibility = Visibility.Hidden;
             EndCombat.Visibility = Visibility.Visible;
 
-            var rollerDialog = new RollInitiativeDialog();
+            var rollerDialog = new RollInitiativeDialog() {Owner =  this};
             #region Initiative Roller logic
             if (rollerDialog.ShowDialog() == false)
             {
@@ -88,6 +88,11 @@ namespace InitiativeTracker
                 {
                     combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
                 }
+                var initSetDialog = new SetInitiativeDialog((ObservableCollection<Combatant>)_combatants.Where(combatant => combatant.Type == 'P'))
+                {
+                    Owner = this
+                };
+                var _ = initSetDialog.ShowDialog();
             }
             else
             {
@@ -95,6 +100,11 @@ namespace InitiativeTracker
                 {
                     combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
                 }
+                var initSetDialog = new SetInitiativeDialog((ObservableCollection<Combatant>)_combatants.Where(combatant => combatant.Type == 'M'))
+                {
+                    Owner = this
+                };
+                var _ = initSetDialog.ShowDialog();
             }
             #endregion
 
