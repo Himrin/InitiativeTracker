@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using InitiativeTracker.Model;
 
@@ -11,11 +10,10 @@ namespace InitiativeTracker
 	public partial class SetInitiativeDialog : Window
 	{
         public ObservableCollection<Combatant> Combatants { get; set; }
-        public SetInitiativeDialog(ObservableCollection<Combatant> combatants)
+        public SetInitiativeDialog()
 		{
 			InitializeComponent();
-            Combatants = combatants;
-		    InitiativeDisplayListBox.ItemsSource = combatants;
+		    InitiativeDisplayListBox.ItemsSource = Combatants;
 		}
 
         private void Reset_Click(object sender, RoutedEventArgs e)

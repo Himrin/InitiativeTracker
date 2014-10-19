@@ -23,12 +23,9 @@ namespace InitiativeTracker
         private void AddCombatant_Click(object sender, RoutedEventArgs e)
         {
             var addCombatantDialog = new AddCombatantDialog {Owner = this};
-            
-            if (addCombatantDialog.ShowDialog() == true)
-            {
-                _combatants.Add(addCombatantDialog.Combatant);
-            };
 
+            if (addCombatantDialog.ShowDialog() == true)
+                _combatants.Add(addCombatantDialog.Combatant);
         }
 
         private void AddCopy_Click(object sender, RoutedEventArgs e)
@@ -88,11 +85,11 @@ namespace InitiativeTracker
                 {
                     combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
                 }
-                var initSetDialog = new SetInitiativeDialog((ObservableCollection<Combatant>)_combatants.Where(combatant => combatant.Type == 'P'))
+                var initSetDialog = new SetInitiativeDialog{Owner = this};
+                foreach (var player in _combatants.Where(combatant => combatant.Type == 'P'))
                 {
-                    Owner = this
-                };
-                var _ = initSetDialog.ShowDialog();
+                    initSetDialog.Combatants.Add(player);
+                }
             }
             else
             {
@@ -100,11 +97,11 @@ namespace InitiativeTracker
                 {
                     combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
                 }
-                var initSetDialog = new SetInitiativeDialog((ObservableCollection<Combatant>)_combatants.Where(combatant => combatant.Type == 'M'))
+                var initSetDialog = new SetInitiativeDialog{Owner = this};
+                foreach (var monster in _combatants.Where(combatant => combatant.Type == 'M'))
                 {
-                    Owner = this
-                };
-                var _ = initSetDialog.ShowDialog();
+                    initSetDialog.Combatants.Add(monster);
+                }
             }
             #endregion
 
