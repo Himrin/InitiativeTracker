@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -99,7 +100,7 @@ namespace InitiativeTracker
             CombatantDisplayList.SelectedItem = _combatants[_turnIndicator];
         }
 
-        private void InitiativeToSet(ObservableCollection<Combatant> combatants, char toSet)
+        private void InitiativeToSet(IEnumerable<Combatant> combatants, char toSet)
         {
             var initSetDialog = new SetInitiativeDialog { Owner = this, Combatants = new ObservableCollection<Combatant>() };
             foreach (var combatant in combatants.Where(combatant => combatant.Type == toSet))
@@ -110,12 +111,21 @@ namespace InitiativeTracker
             initSetDialog.ShowDialog();
         }
 
-        private void InitiativeToRoll(ObservableCollection<Combatant> combatants, char toRoll)
+        private void InitiativeToRoll(IEnumerable<Combatant> combatants, char toRoll)
         {
             foreach (var combatant in combatants.Where(combatant => combatant.Type == toRoll))
             {
                 combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
             }
+        }
+
+        private void EndCombat_Click(object sender, RoutedEventArgs e)
+        {
+            EndCombat.Visibility = Visibility.Hidden;
+            StartCombat.Visibility = Visibility.Visible;
+
+            CombatantDisplayList.SelectedItem = null;
+            //TODO Add code to remove Monster type Combatants.
         }
     }
 }
