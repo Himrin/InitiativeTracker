@@ -13,7 +13,6 @@ namespace InitiativeTracker
         public SetInitiativeDialog()
 		{
 			InitializeComponent();
-		    InitiativeDisplayListBox.ItemsSource = Combatants;
 		}
 
         private void Reset_Click(object sender, RoutedEventArgs e)

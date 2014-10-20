@@ -85,11 +85,13 @@ namespace InitiativeTracker
                 {
                     combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
                 }
-                var initSetDialog = new SetInitiativeDialog{Owner = this};
+                var initSetDialog = new SetInitiativeDialog{Owner = this, Combatants = new ObservableCollection<Combatant>()};
                 foreach (var player in _combatants.Where(combatant => combatant.Type == 'P'))
                 {
                     initSetDialog.Combatants.Add(player);
                 }
+                initSetDialog.InitiativeDisplayListBox.ItemsSource = initSetDialog.Combatants;
+                initSetDialog.ShowDialog();
             }
             else
             {
@@ -97,11 +99,13 @@ namespace InitiativeTracker
                 {
                     combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
                 }
-                var initSetDialog = new SetInitiativeDialog{Owner = this};
+                var initSetDialog = new SetInitiativeDialog{Owner = this, Combatants = new ObservableCollection<Combatant>()};
                 foreach (var monster in _combatants.Where(combatant => combatant.Type == 'M'))
                 {
                     initSetDialog.Combatants.Add(monster);
                 }
+                initSetDialog.InitiativeDisplayListBox.ItemsSource = initSetDialog.Combatants;
+                initSetDialog.ShowDialog();
             }
             #endregion
 
