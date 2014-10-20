@@ -62,6 +62,7 @@ namespace InitiativeTracker
 
         private void StartCombat_Click(object sender, RoutedEventArgs e)
         {
+            if (_combatants.Count == 0) return;
             StartCombat.Visibility = Visibility.Hidden;
             EndCombat.Visibility = Visibility.Visible;
             StartCombatMenuItem.IsEnabled = false;
@@ -92,12 +93,14 @@ namespace InitiativeTracker
             #endregion
 
             var sorted = _combatants.OrderByDescending(combatant => combatant.Initiative).ToList();
+
             for (var i = 0; i < sorted.Count; i++)
             {
                 _combatants[i] = sorted[i];
             }
 
             CombatantDisplayList.SelectedItem = _combatants[_turnIndicator];
+            
         }
 
         private void InitiativeToSet(IEnumerable<Combatant> combatants, char toSet)
