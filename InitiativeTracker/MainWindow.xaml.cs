@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using InitiativeTracker.Model;
@@ -74,38 +75,18 @@ namespace InitiativeTracker
             }
             else if (rollerDialog.Monsters && rollerDialog.Players)
             {
-                foreach (var combatant in _combatants)
-                {
-                    combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
-                }
+                InitiativeToRoll(_combatants,'M');
+                InitiativeToRoll(_combatants,'P');
             }
             else if (rollerDialog.Monsters)
             {
-                foreach (var combatant in _combatants.Where(combatant => combatant.Type == 'M'))
-                {
-                    combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
-                }
-                var initSetDialog = new SetInitiativeDialog{Owner = this, Combatants = new ObservableCollection<Combatant>()};
-                foreach (var player in _combatants.Where(combatant => combatant.Type == 'P'))
-                {
-                    initSetDialog.Combatants.Add(player);
-                }
-                initSetDialog.InitiativeDisplayListBox.ItemsSource = initSetDialog.Combatants;
-                initSetDialog.ShowDialog();
+                InitiativeToRoll(_combatants,'M');
+                InitiativeToSet(_combatants,'P');
             }
             else
             {
-                foreach (var combatant in _combatants.Where(combatant => combatant.Type == 'P'))
-                {
-                    combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
-                }
-                var initSetDialog = new SetInitiativeDialog{Owner = this, Combatants = new ObservableCollection<Combatant>()};
-                foreach (var monster in _combatants.Where(combatant => combatant.Type == 'M'))
-                {
-                    initSetDialog.Combatants.Add(monster);
-                }
-                initSetDialog.InitiativeDisplayListBox.ItemsSource = initSetDialog.Combatants;
-                initSetDialog.ShowDialog();
+                InitiativeToRoll(_combatants,'P');
+                InitiativeToSet(_combatants,'M');
             }
             #endregion
 
@@ -116,6 +97,25 @@ namespace InitiativeTracker
             }
 
             CombatantDisplayList.SelectedItem = _combatants[_turnIndicator];
+        }
+
+        private void InitiativeToSet(ObservableCollection<Combatant> combatants, char toSet)
+        {
+            var initSetDialog = new SetInitiativeDialog { Owner = this, Combatants = new ObservableCollection<Combatant>() };
+            foreach (var combatant in combatants.Where(combatant => combatant.Type == toSet))
+            {
+                initSetDialog.Combatants.Add(combatant);
+            }
+            initSetDialog.InitiativeDisplayListBox.ItemsSource = initSetDialog.Combatants;
+            initSetDialog.ShowDialog();
+        }
+
+        private void InitiativeToRoll(ObservableCollection<Combatant> combatants, char toRoll)
+        {
+            foreach (var combatant in combatants.Where(combatant => combatant.Type == toRoll))
+            {
+                combatant.Initiative = InitiativeRoller.RollInitiativeFor(combatant);
+            }
         }
     }
 }
