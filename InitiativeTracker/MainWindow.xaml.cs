@@ -18,7 +18,6 @@ namespace InitiativeTracker
         public MainWindow()
         {
             InitializeComponent();
-            _combatants.Add(new Combatant("Test Combatant", 'P', 3));
             CombatantDisplayList.ItemsSource = _combatants;
         }
 
