@@ -60,13 +60,13 @@
 				<MenuItem Header="Save _As"/>
 			</MenuItem>
 			<MenuItem Header="_Fighters">
-				<MenuItem Header="Add _New Combatant"/>
-				<MenuItem Header="_Copy Selected Combatant(s)"/>
-				<MenuItem Header="_Remove Selected Combatant(s)"/>
+				<MenuItem Header="Add _New Combatant" Click="AddCombatant_Click"/>
+				<MenuItem Header="_Copy Selected Combatant(s)" Click="AddCombatant_Click"/>
+				<MenuItem Header="_Remove Selected Combatant(s)" Click="RemoveCombatant_Click"/>
 			</MenuItem>
 			<MenuItem Header="_Combat">
-				<MenuItem Header="_Begin Combat"/>
-				<MenuItem Header="_End Combat"/>
+				<MenuItem x:Name="StartCombatMenuItem" Header="_Begin Combat" Click="StartCombat_Click"/>
+				<MenuItem x:Name="EndCombatMenuItem" Header="_End Combat" IsEnabled="False" Click="EndCombat_Click"/>
 			</MenuItem>
 		</Menu>
     </Grid>

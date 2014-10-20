@@ -64,6 +64,8 @@ namespace InitiativeTracker
         {
             StartCombat.Visibility = Visibility.Hidden;
             EndCombat.Visibility = Visibility.Visible;
+            StartCombatMenuItem.IsEnabled = false;
+            EndCombatMenuItem.IsEnabled = true;
 
             var rollerDialog = new RollInitiativeDialog() {Owner =  this};
             #region Initiative Roller logic
@@ -121,6 +123,8 @@ namespace InitiativeTracker
         {
             EndCombat.Visibility = Visibility.Hidden;
             StartCombat.Visibility = Visibility.Visible;
+            StartCombatMenuItem.IsEnabled = true;
+            EndCombatMenuItem.IsEnabled = false;
 
             CombatantDisplayList.SelectedItem = null;
             //Remove Monster Type Combatants if Yes is clicked.
