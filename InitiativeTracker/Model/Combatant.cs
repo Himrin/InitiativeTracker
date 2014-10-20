@@ -95,7 +95,7 @@ namespace InitiativeTracker.Model
         #endregion
 
         //Display Name
-        public void UpdateDisplayName()
+        private void UpdateDisplayName()
         {
             DisplayName = Name + (Counter > 0
                 ? " " + Counter

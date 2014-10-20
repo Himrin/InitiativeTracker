@@ -11,7 +11,6 @@ namespace InitiativeTracker
         public Combatant Combatant { get; set; }
         public AddCombatantDialog()
         {
-
             InitializeComponent();
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -124,7 +123,16 @@ namespace InitiativeTracker
             StartCombat.Visibility = Visibility.Visible;
 
             CombatantDisplayList.SelectedItem = null;
-            //TODO Add code to remove Monster type Combatants based upon result from Dialog.
+            //Remove Monster Type Combatants if Yes is clicked.
+            var removeMonsterDiag = new RemvoeCombatantDialog(){Owner = this};
+            if (removeMonsterDiag.ShowDialog() == true)
+            {
+                var toRemove = _combatants.Where(combatant => combatant.Type == 'M');
+                foreach (var item in toRemove)
+                {
+                    _combatants.Remove(item);
+                }
+            }
         }
 
         private void NextCombatant_Click(object sender, RoutedEventArgs e)
