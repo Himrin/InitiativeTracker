@@ -11,7 +11,20 @@
 					<ColumnDefinition/>
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
-				<TextBlock Grid.Column="0" Text="{Binding DisplayName}" Margin="10"/>
+				<TextBlock Grid.Column="0" Text="{Binding DisplayName}" Margin="10">
+					<TextBlock.Style>
+						<Style TargetType="{x:Type TextBlock}">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding Type}" Value="M">
+									<Setter Property="Foreground" Value="#FFAA0000"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Type}" Value="P">
+									<Setter Property="Foreground" Value="#FF00AA00"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</TextBlock.Style>
+				</TextBlock>
 				<TextBlock Grid.Column="1" Text="{Binding Initiative}" Margin="10" />
 				<TextBlock Grid.Column="2" Text="{Binding DexModifier}" Margin="10" />
 			</Grid>
