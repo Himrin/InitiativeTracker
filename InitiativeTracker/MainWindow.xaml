@@ -52,8 +52,21 @@
         <ListBox x:Name="CombatantDisplayList" Grid.ColumnSpan="5"  Margin="10,10,10,5" ItemTemplate="{DynamicResource CombatantItemDisplay}" SelectionMode="Extended" HorizontalContentAlignment="Stretch" Grid.Row="1"/>
 		<Menu IsMainMenu="True" Grid.Row="0" Grid.ColumnSpan="5">
 			<MenuItem Header="_File">
-				<MenuItem Header="_Load"/>
-				<MenuItem Header="_Save Selected"/>
+				<MenuItem Header="_New"/>
+				<Separator/>
+				<MenuItem Header="_Load New"/>
+				<Separator/>
+				<MenuItem Header="_Save"/>
+				<MenuItem Header="Save _As"/>
+			</MenuItem>
+			<MenuItem Header="_Fighters">
+				<MenuItem Header="Add _New Combatant"/>
+				<MenuItem Header="_Copy Selected Combatant(s)"/>
+				<MenuItem Header="_Remove Selected Combatant(s)"/>
+			</MenuItem>
+			<MenuItem Header="_Combat">
+				<MenuItem Header="_Begin Combat"/>
+				<MenuItem Header="_End Combat"/>
 			</MenuItem>
 		</Menu>
     </Grid>
