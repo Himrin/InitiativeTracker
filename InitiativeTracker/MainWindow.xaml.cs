@@ -125,7 +125,16 @@ namespace InitiativeTracker
             StartCombat.Visibility = Visibility.Visible;
 
             CombatantDisplayList.SelectedItem = null;
-            //TODO Add code to remove Monster type Combatants.
+            //TODO Add code to remove Monster type Combatants based upon result from Dialog.
+        }
+
+        private void NextCombatant_Click(object sender, RoutedEventArgs e)
+        {
+            if (_turnIndicator == _combatants.Count - 1)
+                _turnIndicator = 0;
+            else
+                _turnIndicator++;
+            CombatantDisplayList.SelectedItem = _combatants[_turnIndicator];
         }
     }
 }
