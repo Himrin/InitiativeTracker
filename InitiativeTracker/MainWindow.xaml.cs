@@ -150,5 +150,10 @@ namespace InitiativeTracker
                 _turnIndicator++;
             CombatantDisplayList.SelectedItem = _combatants[_turnIndicator];
         }
+
+        private void NewButton_Click(object sender, RoutedEventArgs e)
+        {
+            _combatants.Clear();
+        }
     }
 }
