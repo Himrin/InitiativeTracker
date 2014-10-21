@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 using InitiativeTracker.Annotations;
 
 namespace InitiativeTracker.Model
@@ -11,7 +12,8 @@ namespace InitiativeTracker.Model
         private string _name;
         private int _counter;
         private string _displayName;
-
+        
+        [XmlIgnore]
         public int Initiative
         {
             get { return _initiative; }
@@ -24,8 +26,10 @@ namespace InitiativeTracker.Model
                 }
             }
         }
+        
         public int DexModifier { get; set; }
 
+        [XmlIgnore]
         public string DisplayName
         {
             get { return _displayName; }

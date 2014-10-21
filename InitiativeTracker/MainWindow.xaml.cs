@@ -166,7 +166,7 @@ namespace InitiativeTracker
             var combatantFileDialog = new OpenFileDialog
             {
                 DefaultExt = ".xml",
-                InitialDirectory = @"E:\InitiativeTracker\",
+                InitialDirectory = @"C:\InitiativeTracker\",
                 Filter = "XML files (.xml)|*.xml"
             };
             if (combatantFileDialog.ShowDialog() == true)
@@ -183,12 +183,9 @@ namespace InitiativeTracker
 
         private void SaveCombat_Click(object sender, RoutedEventArgs e)
         {
-            var writerSerializer = new XmlSerializer(typeof(Combatant));
-            var combatantFileWriter = new StreamWriter(@"E:\InitiativeTracker\serializedCombatant.XML");
-            foreach (var selectedItem in _combatants)
-            {
-                writerSerializer.Serialize(combatantFileWriter,selectedItem);
-            }
+            var writerSerializer = new XmlSerializer(typeof(ObservableCollection<Combatant>),new XmlRootAttribute("Combatants"));
+            var combatantFileWriter = new StreamWriter(@"C:\InitiativeTracker\serializedCombatant.XML");
+            writerSerializer.Serialize(combatantFileWriter,_combatants);
             combatantFileWriter.Close();
         }
     }
