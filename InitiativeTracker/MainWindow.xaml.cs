@@ -2,7 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Xml.Linq;
 using InitiativeTracker.Model;
+using Microsoft.Win32;
 
 namespace InitiativeTracker
 {
@@ -154,6 +156,17 @@ namespace InitiativeTracker
         private void NewButton_Click(object sender, RoutedEventArgs e)
         {
             _combatants.Clear();
+        }
+
+        private void LoadCombatantDialog_Click(object sender, RoutedEventArgs e)
+        {
+            var combatantFileDialog = new OpenFileDialog
+            {
+                DefaultExt = ".xml",
+                InitialDirectory = @"E:\InitiativeTracker\",
+                Filter = "XML files (.xml)|*.xml"
+            };
+            combatantFileDialog.ShowDialog();
         }
     }
 }

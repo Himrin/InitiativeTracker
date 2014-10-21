@@ -54,7 +54,7 @@
 			<MenuItem Header="_File" >
                 <MenuItem Header="_New" Click="NewButton_Click"/>
 				<Separator/>
-				<MenuItem Header="_Load New"/>
+				<MenuItem Header="_Load" Click="LoadCombatantDialog_Click"/>
 				<Separator/>
 				<MenuItem Header="_Save"/>
 				<MenuItem Header="Save _As"/>
