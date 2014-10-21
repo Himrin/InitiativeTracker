@@ -15,7 +15,7 @@ namespace InitiativeTracker
     public partial class MainWindow : Window
     {
         ObservableCollection<Combatant> _combatants = new ObservableCollection<Combatant>();
-        private int _turnIndicator = 0;
+        private int _turnIndicator;
 
         public MainWindow()
         {
@@ -71,7 +71,7 @@ namespace InitiativeTracker
             StartCombatMenuItem.IsEnabled = false;
             EndCombatMenuItem.IsEnabled = true;
 
-            var rollerDialog = new RollInitiativeDialog() {Owner =  this};
+            var rollerDialog = new RollInitiativeDialog {Owner =  this};
             #region Initiative Roller logic
             if (rollerDialog.ShowDialog() == false)
             {
@@ -168,22 +168,29 @@ namespace InitiativeTracker
                 Filter = "XML files (.xml)|*.xml"
             };
             if (combatantFileDialog.ShowDialog() == true)
-                _combatants.Add(ReadCombatantXML(combatantFileDialog.FileName)); 
+            {
+                foreach (var combatant in ReadCombatantXML(combatantFileDialog.FileName))
+                {
+                    _combatants.Add(combatant);
+                }
+            } 
 
         }
 
-        private Combatant ReadCombatantXML(string fileName)
+        private IEnumerable<Combatant> ReadCombatantXML(string fileName)
         {
             var combatantSerializer = new XmlSerializer(typeof(Combatant));
-            var fileReader = new StreamReader(fileName);
-            var combatant = (Combatant) combatantSerializer.Deserialize(fileReader);
-            fileReader.Close();
+            List<Combatant> combatant;
+            using (var fileReader = new StreamReader(fileName))
+            {
+                combatant = (List<Combatant>) combatantSerializer.Deserialize(fileReader);
+            }
             return combatant;
         }
 
         private void SaveCombat_Click(object sender, RoutedEventArgs e)
         {
-            var fileDialog = new SaveFileDialog()
+            var fileDialog = new SaveFileDialog
             {
                 DefaultExt = ".xml",
                 InitialDirectory = @"C:\InitiativeTracker\",
@@ -200,7 +207,7 @@ namespace InitiativeTracker
 
         private void SaveSelected_Click(object sender, RoutedEventArgs routedEventArgs)
         {
-            var fileDialog = new SaveFileDialog()
+            var fileDialog = new SaveFileDialog
             {
                 DefaultExt = ".xml",
                 InitialDirectory = @"C:\InitiativeTracker\",
