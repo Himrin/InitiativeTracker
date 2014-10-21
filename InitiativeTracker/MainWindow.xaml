@@ -56,7 +56,7 @@
 				<Separator/>
 				<MenuItem Header="_Load" Click="LoadCombatantDialog_Click"/>
 				<Separator/>
-				<MenuItem Header="_Save Selected"/>
+                <MenuItem Header="_Save Selected" Click="SaveSelected_Click"/>
 				<MenuItem Header="Save _Entire" Click="SaveCombat_Click"/>
 			</MenuItem>
 			<MenuItem Header="F_ighters">

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -183,10 +184,37 @@ namespace InitiativeTracker
 
         private void SaveCombat_Click(object sender, RoutedEventArgs e)
         {
+            var fileDialog = new SaveFileDialog()
+            {
+                DefaultExt = ".xml",
+                InitialDirectory = @"C:\InitiativeTracker\",
+                Filter = "XML files (.xml)|*.xml"
+            };
             var writerSerializer = new XmlSerializer(typeof(ObservableCollection<Combatant>),new XmlRootAttribute("Combatants"));
-            var combatantFileWriter = new StreamWriter(@"C:\InitiativeTracker\serializedCombatant.XML");
-            writerSerializer.Serialize(combatantFileWriter,_combatants);
-            combatantFileWriter.Close();
+            if (fileDialog.ShowDialog() == true)
+            {
+                var combatantFileWriter = new StreamWriter(fileDialog.FileName);
+                writerSerializer.Serialize(combatantFileWriter, _combatants);
+                combatantFileWriter.Close();
+            }
+        }
+
+        private void SaveSelected_Click(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var fileDialog = new SaveFileDialog()
+            {
+                DefaultExt = ".xml",
+                InitialDirectory = @"C:\InitiativeTracker\",
+                Filter = "XML files (.xml)|*.xml"
+            };
+            var writerSerializer = new XmlSerializer(typeof(List<Combatant>), new XmlRootAttribute("Combatants"));
+            if (fileDialog.ShowDialog() == true)
+            {
+                var combatantFileWriter = new StreamWriter(fileDialog.FileName);
+                writerSerializer.Serialize(combatantFileWriter,
+                    CombatantDisplayList.SelectedItems.OfType<Combatant>().ToList());
+                combatantFileWriter.Close();
+            }
         }
     }
 }
