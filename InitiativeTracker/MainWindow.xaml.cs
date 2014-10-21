@@ -183,12 +183,11 @@ namespace InitiativeTracker
 
         private void SaveCombat_Click(object sender, RoutedEventArgs e)
         {
-            var combatant = new Combatant();
             var writerSerializer = new XmlSerializer(typeof(Combatant));
             var combatantFileWriter = new StreamWriter(@"E:\InitiativeTracker\serializedCombatant.XML");
-            foreach (var selectedItem in CombatantDisplayList.SelectedItems)
+            foreach (var selectedItem in _combatants)
             {
-                writerSerializer.Serialize(combatantFileWriter,combatant);
+                writerSerializer.Serialize(combatantFileWriter,selectedItem);
             }
             combatantFileWriter.Close();
         }
