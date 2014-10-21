@@ -179,11 +179,11 @@ namespace InitiativeTracker
 
         private IEnumerable<Combatant> ReadCombatantXML(string fileName)
         {
-            var combatantSerializer = new XmlSerializer(typeof(Combatant));
-            List<Combatant> combatant;
+            var combatantSerializer = new XmlSerializer(typeof(Combatant),new XmlRootAttribute("Combatants"));
+            List<Combatant> combatant = new List<Combatant>();
             using (var fileReader = new StreamReader(fileName))
             {
-                combatant = (List<Combatant>) combatantSerializer.Deserialize(fileReader);
+                combatant.Add((Combatant)combatantSerializer.Deserialize(fileReader));
             }
             return combatant;
         }
@@ -205,7 +205,7 @@ namespace InitiativeTracker
             }
         }
 
-        private void SaveSelected_Click(object sender, RoutedEventArgs routedEventArgs)
+        private void SaveSelected_Click(object sender, RoutedEventArgs e)
         {
             var fileDialog = new SaveFileDialog
             {
