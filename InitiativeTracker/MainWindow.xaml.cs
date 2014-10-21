@@ -179,11 +179,11 @@ namespace InitiativeTracker
 
         private IEnumerable<Combatant> ReadCombatantXML(string fileName)
         {
-            var combatantSerializer = new XmlSerializer(typeof(Combatant),new XmlRootAttribute("Combatants"));
-            List<Combatant> combatant = new List<Combatant>();
+            var combatantSerializer = new XmlSerializer(typeof(List<Combatant>),new XmlRootAttribute("Combatants"));
+            List<Combatant> combatant;
             using (var fileReader = new StreamReader(fileName))
             {
-                combatant.Add((Combatant)combatantSerializer.Deserialize(fileReader));
+               combatant = (List<Combatant>)combatantSerializer.Deserialize(fileReader);
             }
             return combatant;
         }
