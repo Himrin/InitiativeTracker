@@ -44,7 +44,7 @@ namespace InitiativeTracker
             var copy = original.Clone();
 
             //Find highest combatant counter in list with same name
-            var highestCombatant = _combatants.Where(combatant => combatant.Name == copy.Name).OrderByDescending(combatant => combatant.Counter).First();
+            var highestCombatant = HighCombatant(_combatants, original);
 
             //if highest combatant is a counter of 0, make it one
             if (highestCombatant.Counter == 0)
@@ -167,13 +167,8 @@ namespace InitiativeTracker
                 InitialDirectory = @"C:\InitiativeTracker\",
                 Filter = "XML files (.xml)|*.xml"
             };
-            if (combatantFileDialog.ShowDialog() == true)
-            {
-                foreach (var combatant in ReadCombatantXML(combatantFileDialog.FileName))
-                {
-                    _combatants.Add(combatant);
-                }
-            } 
+            if (combatantFileDialog.ShowDialog() == true) 
+                Merge(_combatants, ReadCombatantXML(combatantFileDialog.FileName));
 
         }
 
@@ -186,6 +181,35 @@ namespace InitiativeTracker
                combatant = (List<Combatant>)combatantSerializer.Deserialize(fileReader);
             }
             return combatant;
+        }
+
+        private void Merge(ICollection<Combatant> combatantsA, IEnumerable<Combatant> combatantsB)
+        {
+            foreach (var combatant in combatantsB)
+            {
+                var highestCombatant = HighCombatant(_combatants, combatant);
+                if (highestCombatant != null)
+                {
+                    //if highest combatant is a counter of 0, make it one
+                    if (highestCombatant.Counter == 0)
+                        highestCombatant.Counter = 1;
+
+                    combatant.Counter = highestCombatant.Counter + 1;
+                }
+                combatantsA.Add(combatant);
+            }
+            
+        }
+
+        private Combatant HighCombatant(ICollection<Combatant> combatants,Combatant combatantSource)
+        {
+            if (combatants.Count() > 0)
+            {
+                var returnCombatant = combatants.Where(combatant => combatant.Name == combatantSource.Name).OrderByDescending(combatant => combatant.Counter).FirstOrDefault();
+                return returnCombatant;
+            }
+
+            return null;
         }
 
         private void SaveCombat_Click(object sender, RoutedEventArgs e)
