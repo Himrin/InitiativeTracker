@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 using InitiativeTracker.Model;
 using Microsoft.Win32;
@@ -179,7 +176,9 @@ namespace InitiativeTracker
         {
             var combatantSerializer = new XmlSerializer(typeof(Combatant));
             var fileReader = new StreamReader(fileName);
-            return (Combatant) combatantSerializer.Deserialize(fileReader);
+            var combatant = (Combatant) combatantSerializer.Deserialize(fileReader);
+            fileReader.Close();
+            return combatant;
         }
 
         private void SaveCombat_Click(object sender, RoutedEventArgs e)
