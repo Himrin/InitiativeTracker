@@ -49,15 +49,15 @@
 		<Button x:Name="EndCombat" Content="End Combat" Grid.Row="2" Grid.Column="2" Margin="5,5,5,10" Visibility="Hidden" Click="EndCombat_Click"/>
         <Button x:Name="NextCombatant" Content="Next Turn" Grid.Row="2" Grid.Column="3" Margin="5,5,5,10" Click="NextCombatant_Click" />
         <Button x:Name="RemoveCombatant" Content="Remove Combatant" Grid.Column="4" Grid.Row="2" Margin="5,5,10,10" Click="RemoveCombatant_Click"/>
-        <ListBox x:Name="CombatantDisplayList" Grid.ColumnSpan="5"  Margin="10,10,10,5" ItemTemplate="{DynamicResource CombatantItemDisplay}" SelectionMode="Extended" HorizontalContentAlignment="Stretch" Grid.Row="1"/>
-		<Menu IsMainMenu="True" Grid.Row="0" Grid.ColumnSpan="5">
+        <ListBox x:Name="CombatantDisplayList" Grid.ColumnSpan="5" Grid.Column="0" Margin="10,10,10,5" ItemTemplate="{DynamicResource CombatantItemDisplay}" SelectionMode="Extended" HorizontalContentAlignment="Stretch" Grid.Row="1"/>
+		<Menu IsMainMenu="True" Grid.Row="0" Grid.ColumnSpan="5" Grid.Column="0">
 			<MenuItem Header="_File" >
                 <MenuItem Header="_New" Click="NewButton_Click"/>
 				<Separator/>
 				<MenuItem Header="_Load" Click="LoadCombatantDialog_Click"/>
 				<Separator/>
-				<MenuItem Header="_Save"/>
-				<MenuItem Header="Save _As"/>
+				<MenuItem Header="_Save Selected"/>
+				<MenuItem Header="Save _Entire" Click="SaveCombat_Click"/>
 			</MenuItem>
 			<MenuItem Header="F_ighters">
 				<MenuItem Header="_Add New Combatant" Click="AddCombatant_Click"/>

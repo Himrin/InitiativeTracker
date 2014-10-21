@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 using InitiativeTracker.Model;
 using Microsoft.Win32;
 
@@ -166,7 +169,28 @@ namespace InitiativeTracker
                 InitialDirectory = @"E:\InitiativeTracker\",
                 Filter = "XML files (.xml)|*.xml"
             };
-            combatantFileDialog.ShowDialog();
+            if (combatantFileDialog.ShowDialog() == true)
+                _combatants.Add(ReadCombatantXML(combatantFileDialog.FileName)); 
+
+        }
+
+        private Combatant ReadCombatantXML(string fileName)
+        {
+            var combatantSerializer = new XmlSerializer(typeof(Combatant));
+            var fileReader = new StreamReader(fileName);
+            return (Combatant) combatantSerializer.Deserialize(fileReader);
+        }
+
+        private void SaveCombat_Click(object sender, RoutedEventArgs e)
+        {
+            var combatant = new Combatant();
+            var writerSerializer = new XmlSerializer(typeof(Combatant));
+            var combatantFileWriter = new StreamWriter(@"E:\InitiativeTracker\serializedCombatant.XML");
+            foreach (var selectedItem in CombatantDisplayList.SelectedItems)
+            {
+                writerSerializer.Serialize(combatantFileWriter,combatant);
+            }
+            combatantFileWriter.Close();
         }
     }
 }

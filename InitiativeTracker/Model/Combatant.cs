@@ -63,6 +63,8 @@ namespace InitiativeTracker.Model
 
         #region Constructors
 
+        public Combatant(){}
+
         public Combatant(string name)
         {
             Name = name;
